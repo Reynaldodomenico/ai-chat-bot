@@ -5,6 +5,7 @@ function App() {
   const [input, setInput] = useState("");
   const [aiReady, setAiReady] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [model, setModel] = useState("gpt-5-mini"); 
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -46,6 +47,7 @@ function App() {
 
     try {
       const response = await window.puter.ai.chat(messageContent, {
+        model,
         onProgress: (partialResponse) => {
           console.log("Partial:", partialResponse);
         },
@@ -85,6 +87,21 @@ function App() {
         >
           {aiReady ? "AI is ready!" : "Loading AI..."}
         </p>
+
+        <div className="flex items-center gap-2 mt-2">
+          <label className="text-gray-700 dark:text-gray-300 text-sm">
+            Model:
+          </label>
+          <select
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+            className="rounded-lg border border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+          >
+            <option value="gpt-5-mini">GPT-5 Mini</option>
+            <option value="gpt-5-nano">GPT-5 Nano</option>
+            <option value="gpt-5">GPT-5</option>
+          </select>
+        </div>
       </header>
 
       <main className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -123,7 +140,6 @@ function App() {
           </div>
         )}
 
-
         <div ref={messagesEndRef} />
       </main>
 
@@ -133,7 +149,8 @@ function App() {
           onChange={(e) => {
             setInput(e.target.value)
             e.target.style.height = "auto";
-            e.target.style.height = `${e.target.scrollHeight}px`;
+            e.target.style.height = `${Math.min(e.target.scrollHeight, 200)}px`;
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
           }}
           onKeyDown={handleKeyPress}
           placeholder={
