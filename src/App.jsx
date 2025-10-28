@@ -51,7 +51,6 @@ function App() {
         },
       });
 
-      console.log("Full response:", response);
       const reply =
         typeof response === "string"
           ? response
@@ -116,11 +115,14 @@ function App() {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-4 py-2 rounded-2xl rounded-bl-none shadow-sm animate-pulse">
-              AI is typing...
+            <div className="bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded-2xl rounded-bl-none shadow-sm flex gap-1 items-center">
+              <span className="w-2 h-2 bg-gray-500 dark:bg-gray-300 rounded-full animate-bounce delay-0"></span>
+              <span className="w-2 h-2 bg-gray-500 dark:bg-gray-300 rounded-full animate-bounce delay-150"></span>
+              <span className="w-2 h-2 bg-gray-500 dark:bg-gray-300 rounded-full animate-bounce delay-300"></span>
             </div>
           </div>
         )}
+
 
         <div ref={messagesEndRef} />
       </main>
@@ -128,7 +130,11 @@ function App() {
       <footer className="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 flex items-center gap-2">
         <textarea
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value)
+            e.target.style.height = "auto";
+            e.target.style.height = `${e.target.scrollHeight}px`;
+          }}
           onKeyDown={handleKeyPress}
           placeholder={
             aiReady ? "Type your message..." : "AI is not ready yet."
