@@ -33,6 +33,13 @@ function App() {
     ]);
   };
 
+  function parseAIContent(content) {
+    if (typeof content === "string") return content;
+    if (Array.isArray(content)) return content.map(c => c.text || "").join("\n");
+    if (content?.text) return content.text;
+    return "No response from AI.";
+  }
+
   const sendMessage = async () => {
     const messageContent = input.trim();
     if (!messageContent) return;
@@ -53,12 +60,9 @@ function App() {
         },
       });
 
-      const reply =
-        typeof response === "string"
-          ? response
-          : response.message?.content || "No response from AI.";
-
+      const reply = parseAIContent(response.message.content);
       addMessages(reply, false);
+
     } catch (error) {
       console.error("Error communicating with AI:", error);
       addMessages("Error: Unable to get response from AI.", false);
@@ -100,6 +104,7 @@ function App() {
             <option value="gpt-5-mini">GPT-5 Mini</option>
             <option value="gpt-5-nano">GPT-5 Nano</option>
             <option value="gpt-5">GPT-5</option>
+            <option value="claude-sonnet-4">Claude Sonnet 4</option>
           </select>
         </div>
       </header>
