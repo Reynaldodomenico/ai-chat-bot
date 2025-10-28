@@ -1,16 +1,38 @@
-# React + Vite
+# 💬 AI Chat Bot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern AI chat application built with **React**, **Tailwind CSS**, and **Puter.js**, featuring AI model selection.
 
-Currently, two official plugins are available:
+## ⚡ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Chat with multiple AI models (`GPT-5 Mini`, `GPT-5 Nano`, `GPT-5`, `Claude Sonnet 4`)  
+- Responsive UI with **Tailwind CSS**   
+- Dark/Light theme toggle  
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Getting Started
 
-## Expanding the ESLint configuration
+### 1. Clone the repository
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+git clone https://github.com/Reynaldodomenico/ai-chat-bot.git
+cd ai-chat-bot
+```
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Start development server
+```bash
+npm run dev
+```
+
+App runs at http://localhost:5173.
+
+---
+
+## ⚙️ Usage
+1. Select an AI model from the dropdown
+2. Type a message and press Enter or click Send
+3. AI will respond to your chat!
