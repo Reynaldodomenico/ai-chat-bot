@@ -5,8 +5,18 @@ function App() {
   const [input, setInput] = useState("");
   const [aiReady, setAiReady] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [model, setModel] = useState("gpt-5-mini"); 
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
 
   useEffect(() => {
     const checkAiReady = setInterval(() => {
@@ -99,13 +109,20 @@ function App() {
           <select
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            className="rounded-lg border border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+            className="form-select appearance-none rounded-lg border border-gray-300 dark:border-gray-600 px-2 py-1 text-sm bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
           >
             <option value="gpt-5-mini">GPT-5 Mini</option>
             <option value="gpt-5-nano">GPT-5 Nano</option>
             <option value="gpt-5">GPT-5</option>
             <option value="claude-sonnet-4">Claude Sonnet 4</option>
           </select>
+
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="ml-4 px-2 py-1 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 text-sm"
+          >
+            {darkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
         </div>
       </header>
 
